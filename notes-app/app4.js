@@ -1,7 +1,28 @@
 
-
+console.log(process.argv)
 const add = function() {
-    return 1;
+    return 'Adding note successfully';
 }
-const s = add()
-console.log(s)
+
+const remove = function() {
+    return 'Note removed successfully'
+}
+
+const list = function() {
+    return 'list'
+}
+
+const read = function() {
+    return 'Note already readed'
+}
+
+const input = process.argv[2]
+if(input === 'add') {
+    console.log(add())
+} else if(input === 'remove') {
+    console.log(remove())
+} else if(input === 'list') {
+    console.log(list())
+} else {
+    console.log(read())
+}
