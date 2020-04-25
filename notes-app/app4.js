@@ -1,5 +1,6 @@
-
+const yargs = require('yargs')
 console.log(process.argv)
+console.log(yargs.argv)
 const add = function() {
     return 'Adding note successfully';
 }
