@@ -4,9 +4,15 @@ const url = 'http://api.weatherstack.com/current?access_key=85da9ec8ae05d8415669
 
 // simply converting the string into object use lowwer json only
 request( { url: url, json: true }, (error, response) => {
-    console.log(response.body.current)  
+    if (error) {
+        console.log('Check your connectivity')
+    } else if(response.body.error) {
+        console.log('Check the URL')
+    } else {
+        console.log(response.body.current)  
     console.log(response.body.request)   // only print about request
     console.log(response.body.location)  // only prints about the location 
 
     console.log(response.body.current.weather_descriptions[0] + ', we are in ' + response.body.location.country + ' present temperature is ' + response.body.current.temperature)
+    }
 })  
