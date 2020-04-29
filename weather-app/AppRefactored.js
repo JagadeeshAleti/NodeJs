@@ -1,3 +1,4 @@
+const request = require('request')
 const geocode = require('./refactored_utils/geocode')
 const forecast = require('./refactored_utils/forecast')
 
