@@ -5,3 +5,8 @@ h1 {
 img {
     width: 250px;
 }
+
+#error {
+    text-decoration: underline;
+    color: red;
+}
