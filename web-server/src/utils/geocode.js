@@ -7,7 +7,7 @@ const geocode = (address, callback) => {
         if(error) {
             callback('Unable to connect to internet', undefined)
         } else if (response.body.features.length === 0) {
-            callback('Check the URL', undefined)
+            callback('Unable to find Location, Try another search', undefined)
         } else {
             callback(undefined, {
                 latitude: response.body.features[0].center[0],

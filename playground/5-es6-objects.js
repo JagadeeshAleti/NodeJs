@@ -30,7 +30,7 @@ console.log(label, label, propertyStock, rating)
 // const transaction = (type, product) => {
 //     console.log(type, product.label, product.stock)
 // }
-const transaction = (type, {label, stock}) => {
+const transaction = (type, {label, stock = 0 } = {}) => {
     console.log(type, label, stock)
 }
 
