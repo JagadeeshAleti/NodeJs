@@ -9,7 +9,7 @@ const forecast = (latitude, longitude, callback) => {
         } else if (body.error) {
             callback('Check URL once again', undefined)
         } else {
-            callback(undefined, 'Currentl we are in ' + body.location.name + 'and temperature is ' + body.current.temperature + ' by the temperature its like  ' + body.current.weather_descriptions[0])
+            callback(undefined, body.current.weather_descriptions[0] + ". It is currently " + body.current.temperature + " degrees out. It feels like " + body.current.feelslike + " degrees out. The humidity is " +   body.current.humidity + "%")
        }
     })
 }
