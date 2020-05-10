@@ -15,55 +15,29 @@ MongoClient.connect(connectionURL, { useUnifiedTopology: true }, (error, client)
     }
 
     const db = client.db(databaseName)
-    
-    //By id
-    db.collection('users').findOne( { _id: new ObjectID('5eb6c583d1ea0211858c7b5f') }, (error, user) => {
-        if (error) {
-            return console.log('Unable to fetch')
+  
+    db.collection('users').updateOne({
+        _id: new ObjectID('5eb78bf141f8de0d9ebd1434')
+    }, {
+        $inc: {
+            age: 1
         }
-
-        console.log(user)
+    }).then((result) => {
+        console.log(result)
+    }).catch((error) => {
+        console.log(error)
     })
 
-    //By field name
-    db.collection('tasks').findOne({ description: 'Pot plants'}, (error, task) => {
-        if (error) {
-            return console.log('Unable to fetch')
+    db.collection('tasks').updateMany({
+        completed: false
+    }, {
+        $set: {
+            completed: true
         }
-
-        console.log(task)
+    }).then((result) => {
+        console.log('No.of documents updated : ' + result.modifiedCount)
+    }).catch((error) => {
+        console.log(error)
     })
 
-    //cursor is return type of find method
-    db.collection('users').find({ age: 27 }).toArray( (error, user) => {
-        if (error) {
-            return console.log('Unable to fetch the data')
-        }
-
-        console.log(user)
-    })
-
-    db.collection('users').find( {age: 27} ).count( (error, no_of_users) => {
-        if (error) {
-            return console.log('Unab;e to fetch the data')
-        }
-
-        console.log('Total no.of users where age 27 is : ' + no_of_users)
-    })
-
-    db.collection('tasks').findOne( {_id: new ObjectID('5eb6c14d04e04b0ff8d313d4') }, (error, task) => {
-        if (error) {
-            return console.log('Unable to fetch')
-        }
-
-        console.log(task)
-    })
-
-    db.collection('tasks').find({ completed: false}).toArray((error, task) => {
-        if (error) {
-            return console.log('Unable to Fetch!!')
-        }
-
-        console.log(task)
-    })
 })
