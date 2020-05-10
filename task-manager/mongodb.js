@@ -9,11 +9,6 @@ const { MongoClient, ObjectID } = require('mongodb')
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
 
-const id = new ObjectID()
-console.log(id.id.length)
-console.log(id.toHexString().length)
-//console.log(id.getTimestamp()) ===>> Give the time when the id was created by the MongoBD server
-
 MongoClient.connect(connectionURL, { useUnifiedTopology: true }, (error, client) => {
     if (error) {
         return console.log('Unable to connect to database!')
@@ -21,49 +16,54 @@ MongoClient.connect(connectionURL, { useUnifiedTopology: true }, (error, client)
 
     const db = client.db(databaseName)
     
-    // db.collection('users').insertOne({
-    //     name: 'Vikram',
-    //     age: 26
-    // }, (error, result) => {
-    //     if (error) {
-    //         return console.log('Unable to insert user')
-    //     }
+    //By id
+    db.collection('users').findOne( { _id: new ObjectID('5eb6c583d1ea0211858c7b5f') }, (error, user) => {
+        if (error) {
+            return console.log('Unable to fetch')
+        }
 
-    //     console.log(result.ops)
-    // })
+        console.log(user)
+    })
 
-    // db.collection('users').insertMany([
-    //     {
-    //         name: 'Jen',
-    //         age: 28
-    //     }, {
-    //         name: 'Sunther',
-    //         age: 27 
-    //     }
-    // ], (error, result) => {
-    //         if (error) {
-    //             return console.log('Unable to insert documents')
-    //         }
+    //By field name
+    db.collection('tasks').findOne({ description: 'Pot plants'}, (error, task) => {
+        if (error) {
+            return console.log('Unable to fetch')
+        }
 
-    //         console.log(result.ops)
-    // })
+        console.log(task)
+    })
 
-    // db.collection('tasks').insertMany([
-    //     {
-    //         description: 'Clean the House',
-    //         completed: true
-    //     },{
-    //         description: 'Renew inspection',
-    //         completed: false
-    //     },{
-    //         description: 'Pot plants',
-    //         completed: false
-    //     }
-    // ], (error, result) => {
-    //     if (error) {
-    //         return console.log('Unable to insert tasks!!')
-    //     }
+    //cursor is return type of find method
+    db.collection('users').find({ age: 27 }).toArray( (error, user) => {
+        if (error) {
+            return console.log('Unable to fetch the data')
+        }
 
-    //     console.log(result.ops)
-    // })
+        console.log(user)
+    })
+
+    db.collection('users').find( {age: 27} ).count( (error, no_of_users) => {
+        if (error) {
+            return console.log('Unab;e to fetch the data')
+        }
+
+        console.log('Total no.of users where age 27 is : ' + no_of_users)
+    })
+
+    db.collection('tasks').findOne( {_id: new ObjectID('5eb6c14d04e04b0ff8d313d4') }, (error, task) => {
+        if (error) {
+            return console.log('Unable to fetch')
+        }
+
+        console.log(task)
+    })
+
+    db.collection('tasks').find({ completed: false}).toArray((error, task) => {
+        if (error) {
+            return console.log('Unable to Fetch!!')
+        }
+
+        console.log(task)
+    })
 })
