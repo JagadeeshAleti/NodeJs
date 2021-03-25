@@ -33,7 +33,7 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
     res.render('help', {
-        helpText: 'This is some helpfulText',
+        helpText: 'If you are not getting any information, check map-box.com',
         title: 'Help',
         name: 'Jagadeesh'
     })
